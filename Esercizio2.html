@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confronto voti</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css');
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Confronto voti</h1>
+
+        <div class="flex items-center">
+            <label class="mr-2 text-gray-700 font-bold">Mario Rossi:</label>
+            <input id="mario-vote" type="number" min="1" max="10" value="3" class="w-1/3 px-2 py-1">
+            <span id="mario-counter" class="ml-4 text-lg font-bold"></span>
+        </div>
+
+        <div class="flex items-center mt-4">
+            <label class="mr-2 text-gray-700 font-bold">Luigi Verdi:</label>
+            <input id="luigi-vote" type="number" min="1" max="10" value="3" class="w-1/3 px-2 py-1">
+            <span id="luigi-counter" class="ml-4 text-lg font-bold"></span>
+        </div>
+
+        <div id="result" class="mt-4 text-lg font-bold"></div>
+    </div>
+
+    <script>
+        const marioVoteInput = document.getElementById('mario-vote');
+        const luigiVoteInput = document.getElementById('luigi-vote');
+        const marioCounter = document.getElementById('mario-counter');
+        const luigiCounter = document.getElementById('luigi-counter');
+        const resultDiv = document.getElementById('result');
+
+        let marioVote = 3;
+        let luigiVote = 3;
+
+        function aggiornaVoti() {
+            marioCounter.textContent = marioVote;
+            luigiCounter.textContent = luigiVote;
+
+            if (marioVote > luigiVote) {
+                resultDiv.textContent = "Mario Rossi è in vantaggio";
+                resultDiv.classList.remove("text-green-500");
+                resultDiv.classList.add("text-red-500");
+            } else if (marioVote < luigiVote) {
+                resultDiv.textContent = "Luigi Verdi è in vantaggio";
+                resultDiv.classList.remove("text-red-500");
+                resultDiv.classList.add("text-green-500");
+            } else {
+                resultDiv.textContent = "Mario Rossi e Luigi Verdi sono pari";
+                resultDiv.classList.remove("text-red-500", "text-green-500");
+            }
+        }
+
+        marioVoteInput.addEventListener('input', function () {
+            marioVote = parseInt(marioVoteInput.value);
+            aggiornaVoti();
+        });
+
+        luigiVoteInput.addEventListener('input', function () {
+            luigiVote = parseInt(luigiVoteInput.value);
+            aggiornaVoti();
+        });
+
+        aggiornaVoti();
+    </script>
+</body>
+
+</html>

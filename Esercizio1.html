@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studenti e Studentesse</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-gray-200 py-4 px-8">
+        <h1 class="text-2xl font-bold text-gray-800">App che non funziona</h1>
+    </header>
+
+    <!-- Contenuto principale -->
+    <main id="mainContent" class="container mx-auto py-8">
+        <div class="flex justify-end mb-4">
+            <button id="toggleMode" class="bg-red-500 hover:bg-gray-700 text-white py-2 px-4">
+                Light/Dark
+            </button>
+        </div>
+
+        <!-- studenti e studentesse -->
+        <div id="studentsContainer" class="flex">
+            <div id="studentList" class="flex-1 p-4 order-1 md:order-2">
+                <h2 class="text-2xl font-bold mb-4">Studenti</h2>
+                <!-- Lista degli studenti -->
+                <div class="bg-blue-500 text-white p-2 rounded dark:bg-blue-900 dark:text-black">
+                    <!-- Gli elementi HTML degli studenti verranno generati dinamicamente qui -->
+                </div>
+            </div>
+
+            <div id="studentessList" class="flex-1 p-4 order-2 md:order-1">
+                <h2 class="text-2xl font-bold mb-4">Studentesse</h2>
+                <div class="bg-pink-500 text-white p-2 rounded dark:bg-pink-900 dark:text-black">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="bg-gray-200 py-4 px-8 mt-8">
+        <p class="text-gray-600">Petru</p>
+    </footer>
+
+    <script>
+        const students = [
+            { id: 1, fullname: "mario rossi", avg: 6, gender: "m" },
+            { id: 2, fullname: "luigi verdi", avg: 4, gender: "m" },
+            { id: 3, fullname: "peach pink", avg: 8, gender: "f" },
+            { id: 4, fullname: "wario rossi", avg: 9, gender: "m" },
+            { id: 5, fullname: "daisy gialli", avg: 7, gender: "f" }
+        ];
+
+        function studentiS() {
+            const studentList = document.getElementById('studentList');
+            const studentessList = document.getElementById('studentessList');
+
+            students.forEach(student => {
+                const studentElement = document.createElement('div');
+                studentElement.classList.add('mb-2');
+
+                const idElement = document.createElement('strong');
+                idElement.textContent = 'ID: ' + student.id;
+                studentElement.appendChild(idElement);
+
+                const fullnameElement = document.createElement('div');
+                fullnameElement.textContent = 'Nome completo: ' + student.fullname;
+                studentElement.appendChild(fullnameElement);
+
+                const avgElement = document.createElement('div');
+                avgElement.textContent = 'Media: ' + student.avg;
+                studentElement.appendChild(avgElement);
+
+                const genderElement = document.createElement('div');
+                genderElement.textContent = 'Genere: ' + (student.gender === 'm' ? 'Maschio' : 'Femmina');
+                studentElement.appendChild(genderElement);
+
+                if (student.gender === 'm') {
+                    studentList.appendChild(studentElement);
+                } else {
+                    studentessList.appendChild(studentElement);
+                }
+            });
+        }
+        studentiS();
+
+        // light/dark mode
+        const toggleButton = document.getElementById('toggleMode');
+        const mainContent = document.getElementById('mainContent');
+        const studentsContainer = document.getElementById('studentsContainer');
+
+        toggleButton.addEventListener('click', () => {
+            mainContent.classList.toggle('bg-white');
+            mainContent.style.backgroundColor = 'black'
+            mainContent.style.backgroundColor.toggle = 'white'
+            mainContent.style.color = 'white';
+            mainContent.style.color.toggle = 'black';
+            mainContent.classList.toggle('text-black');
+            studentsContainer.classList.toggle('flex-row');
+            studentsContainer.classList.toggle('flex-row-reverse');
+        });
+    </script>
+</body>
+
+</html>
